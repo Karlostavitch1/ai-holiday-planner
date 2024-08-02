@@ -8,33 +8,37 @@ from trip_tasks import TripTasks
 from typing import Any, Dict
 import streamlit as st
 
-# Initialize session state for messages, inputs, and authentication
-if "messages" not in st.session_state:
-    st.session_state["messages"] = []
-
-if "location" not in st.session_state:
-    st.session_state["location"] = ""
-
-if "cities" not in st.session_state:
-    st.session_state["cities"] = ""
-
-if "date_range" not in st.session_state:
-    st.session_state["date_range"] = ""
-
-if "interests" not in st.session_state:
-    st.session_state["interests"] = ""
-
-if "processing" not in st.session_state:
-    st.session_state["processing"] = False
-
-if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
-
-if "plan_trip_clicked" not in st.session_state:
-    st.session_state["plan_trip_clicked"] = False
-
 # Define the password for authentication
 PASSWORD = "DevPro2024!"
+
+# Function to initialize or reset session state
+def initialize_session_state():
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = []
+
+    if "location" not in st.session_state:
+        st.session_state["location"] = ""
+
+    if "cities" not in st.session_state:
+        st.session_state["cities"] = ""
+
+    if "date_range" not in st.session_state:
+        st.session_state["date_range"] = ""
+
+    if "interests" not in st.session_state:
+        st.session_state["interests"] = ""
+
+    if "processing" not in st.session_state:
+        st.session_state["processing"] = False
+
+    if "authenticated" not in st.session_state:
+        st.session_state["authenticated"] = False
+
+    if "plan_trip_clicked" not in st.session_state:
+        st.session_state["plan_trip_clicked"] = False
+
+# Call the function to initialize/reset session state
+initialize_session_state()
 
 avatars = {
     "Writer": "https://cdn-icons-png.flaticon.com/512/320/320336.png",
@@ -108,10 +112,15 @@ def login():
     if st.button("Login"):
         if password == PASSWORD:
             st.session_state["authenticated"] = True
+            # Force a rerun by setting query parameters
+            st.query_params = {"authenticated": "true"}
         else:
             st.error("Invalid password")
 
 if __name__ == "__main__":
+    if st.query_params.get("authenticated") == "true":
+        st.session_state["authenticated"] = True
+    
     if st.session_state["authenticated"]:
         st.title("🌍 Trip Planner Crew")
 
