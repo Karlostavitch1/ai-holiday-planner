@@ -11,11 +11,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone https://github.com/Karlostavitch1/ai-holiday-planner.git .
 
-RUN pip instll poetry -y
-
-RUN Poetry lock -y
-
-RUN poetry install -y
+RUN pip3 install -r requirements.txt
 
 EXPOSE 80
 
