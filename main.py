@@ -117,12 +117,56 @@ def login():
         else:
             st.error("Invalid password")
 
+# Apply DevPro branding
+st.markdown("""
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        .devpro-header {
+            display: flex;
+            align-items: center;
+        }
+        .devpro-title {
+            font-size: 2em;
+            font-weight: bold;
+            margin-left: 10px;
+            color: #ffffff; /* Changed to white */
+            font-family: 'Roboto', sans-serif;
+        }
+        .stApp {
+            background-color: #00274d; /* Dark blue background */
+            color: #ffffff; /* Text color */
+            font-family: 'Roboto', sans-serif;
+        }
+        .stTextInput > div > div > input {
+            background-color: #ffffff; /* Input background */
+            color: #003366; /* Input text color */
+            caret-color: black; /* Cursor color */
+        }
+        .stButton > button {
+            background-color: #0073e6; /* Button background */
+            color: white; /* Button text color */
+        }
+        .stButton > button:hover {
+            background-color: #005bb5; /* Button hover background */
+            color: white; /* Button hover text color */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+    <div class="devpro-header">
+        <img src="https://devpros.com.au/wp-content/uploads/2020/07/DevPro-Header.png" style="width: auto; height: 60px; margin-right: 10px;">
+        <span class="devpro-title">Holiday Planner</span>
+    </div>
+""", unsafe_allow_html=True)
+
 if __name__ == "__main__":
-    if st.query_params.get("authenticated") == "true":
+    if st.query_params.get("authenticated") == ["true"]:
         st.session_state["authenticated"] = True
     
     if st.session_state["authenticated"]:
-        st.title("🌍 Trip Planner Crew")
+        st.title("🌍 Where do you want to go?")
 
         location = st.text_input("From where will you be traveling from?", value=st.session_state["location"])
         cities = st.text_input("What are the cities options you are interested in visiting?", value=st.session_state["cities"])

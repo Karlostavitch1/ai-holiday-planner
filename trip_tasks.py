@@ -17,7 +17,8 @@ class TripTasks:
                 report on the chosen city, and everything you found out
                 about it, including the actual flight costs, weather 
                 forecast and attractions. Note the currency of the costs, 
-                if unknown assume USD.
+                if unknown assume local currency from the website domain, 
+                with .com being USD.
                 {self.__tip_section()}
 
                 Traveling from: {origin}
@@ -43,7 +44,8 @@ class TripTasks:
                 the city has to offer, including hidden gems, cultural
                 hotspots, must-visit landmarks, weather forecasts, and
                 high level costs. Note the currency of the costs, 
-                if unknown assume USD.
+                if unknown assume local currency from the website domain, 
+                with .com being USD.
                 
                 The final answer must be a comprehensive city guide, 
                 rich in cultural insights and practical tips, 
