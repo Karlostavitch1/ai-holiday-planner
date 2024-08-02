@@ -11,10 +11,14 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone https://github.com/Karlostavitch1/ai-holiday-planner.git .
 
-RUN pip3 install -r requirements.txt
+RUN pip instll poetry -y
 
-EXPOSE 8501
+RUN Poetry lock -y
+
+RUN poetry install -y
+
+EXPOSE 80
 
 HEALTHCHECK CMD curl --fail http://localhost:80/_stcore/health
 
-ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=80", "--server.address=0.0.0.0"]
